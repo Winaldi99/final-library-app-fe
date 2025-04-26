@@ -27,7 +27,7 @@ export type CategoryType = {
 };
 
 const fetchBookList = async (token: string | null, page = 1, limit = 10) => {
-  return await axios.get<BookType[]>(`/books?page=${page}&limit=${limit}`, {
+  return await axios.get<BookType[]>(`/api/books?page=${page}&limit=${limit}`, {
     headers: { Authorization: `Bearer ${token}` }
   });
 };

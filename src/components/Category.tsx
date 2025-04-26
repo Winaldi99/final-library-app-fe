@@ -17,7 +17,7 @@ export type CategoryType = {
 };
 
 const fetchCategoryList = async (token: string | null, page = 1, limit = 10) => {
-  return await axios.get<CategoryType[]>(`/category?page=${page}&limit=${limit}`, {
+  return await axios.get<CategoryType[]>(`/api/category?page=${page}&limit=${limit}`, {
     headers: { Authorization: `Bearer ${token}` }
   });
 };
