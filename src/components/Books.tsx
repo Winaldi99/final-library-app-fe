@@ -33,7 +33,7 @@ const fetchBookList = async (token: string | null, page = 1, limit = 10) => {
 };
 
 const fetchCategories = async (token: string | null) => {
-  return await axios.get<CategoryType[]>("/category", {
+  return await axios.get<CategoryType[]>("/api/category", {
     headers: { Authorization: `Bearer ${token}` }
   });
 };
