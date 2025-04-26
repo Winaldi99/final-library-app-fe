@@ -9,7 +9,8 @@ import { BellIcon } from "@heroicons/react/16/solid";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../utils/AuthProvider";
 
-const navigation = [{ name: "Post", to: "/posts", current: false }];
+const navigation = [{ name: "Post", to: "/posts", current: false },
+                    { name: "Books", to: "/books", current: false }];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
