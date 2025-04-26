@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Post from "./pages/Post";
 import Books from "./components/Books";
+import Category from "./components/Category";
 import Register from "./pages/Register";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
@@ -61,6 +62,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Books />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="categories"
+            element={
+              <PrivateRoute>
+                <Category />
               </PrivateRoute>
             }
           />
