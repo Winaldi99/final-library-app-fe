@@ -11,7 +11,8 @@ import { useAuth } from "../utils/AuthProvider";
 
 const navigation = [{ name: "Post", to: "/posts", current: false },
                     { name: "Books", to: "/books", current: false },
-                    { name: "Categories", to: "/categories", current: false }];
+                    { name: "Categories", to: "/categories", current: false },
+                    { name: "Review", to: "/review", current: false }];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

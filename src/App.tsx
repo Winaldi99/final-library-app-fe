@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Post from "./pages/Post";
 import Books from "./components/Books";
 import Category from "./components/Category";
+import BookReviewSystem from "./components/Review";
 import Register from "./pages/Register";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
@@ -70,6 +71,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Category />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="review"
+            element={
+              <PrivateRoute>
+                <BookReviewSystem />
               </PrivateRoute>
             }
           />
