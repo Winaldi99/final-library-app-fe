@@ -22,7 +22,7 @@ const CategoryDetail = ({ category, onClose, onEdit, onDelete }: CategoryDetailP
     setError("");
 
     try {
-      await axios.delete(`/category/${category.id}`, {
+      await axios.delete(`/api/category/${category.id}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       onDelete();

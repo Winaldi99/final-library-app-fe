@@ -65,12 +65,12 @@ const CategoryForm = ({
     try {
       if (isEditMode && category) {
         // Update existing category
-        await axios.put(`/category/${category.id}`, formData, {
+        await axios.put(`/api/category/${category.id}`, formData, {
           headers: { Authorization: `Bearer ${getToken()}` }
         });
       } else {
         // Create new category
-        await axios.post("/category", formData, {
+        await axios.post("/api/category", formData, {
           headers: { Authorization: `Bearer ${getToken()}` }
         });
       }
