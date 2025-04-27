@@ -22,7 +22,7 @@ const BookDetail = ({ book, onClose, onEdit, onDelete }: BookDetailProps) => {
     setError("");
 
     try {
-      await axios.delete(`/books/${book.id}`, {
+      await axios.delete(`/api/books/${book.id}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       onDelete();

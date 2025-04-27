@@ -67,12 +67,12 @@ const BookForm = ({
     try {
       if (isEditMode && book) {
         // Update existing book
-        await axios.put(`/books/${book.id}`, formData, {
+        await axios.put(`/api/books/${book.id}`, formData, {
           headers: { Authorization: `Bearer ${getToken()}` }
         });
       } else {
         // Create new book
-        await axios.post("/books", formData, {
+        await axios.post("/api/books", formData, {
           headers: { Authorization: `Bearer ${getToken()}` }
         });
       }
