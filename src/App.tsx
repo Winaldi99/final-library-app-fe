@@ -9,7 +9,6 @@ import BaseLayout from "./layouts/BaseLayout";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Post from "./pages/Post";
 import Books from "./pages/Books";
 import Category from "./pages/Category";
 import BookReviewSystem from "./pages/Review";
@@ -47,14 +46,6 @@ function App() {
             element={
               <PrivateRoute>
                 <Home />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="posts"
-            element={
-              <PrivateRoute>
-                <Post />
               </PrivateRoute>
             }
           />
