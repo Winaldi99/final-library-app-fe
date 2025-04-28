@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../utils/AuthProvider";
 import axios from "../utils/AxiosInstance";
-import { CategoryType } from "./Category";
+import { CategoryType } from "../pages/Category";
 import { CloseOutlined, SaveOutlined } from "@ant-design/icons";
 
 interface CategoryFormProps {
@@ -18,17 +18,17 @@ interface FormData {
   description: string;
 }
 
-const CategoryForm = ({ 
-  isOpen, 
-  onClose, 
-  onSubmit, 
-  category, 
-  isEditMode 
+const CategoryForm = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  category,
+  isEditMode
 }: CategoryFormProps) => {
   const { getToken } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     description: ""
@@ -50,7 +50,9 @@ const CategoryForm = ({
     }
   }, [isEditMode, category]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -77,7 +79,10 @@ const CategoryForm = ({
       }
       onSubmit();
     } catch (err: any) {
-      setError(err.response?.data?.message || "An error occurred while saving the category");
+      setError(
+        err.response?.data?.message ||
+          "An error occurred while saving the category"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -108,7 +113,10 @@ const CategoryForm = ({
 
         <form onSubmit={handleSubmit} className="p-4">
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >
               Name
             </label>
             <input
@@ -124,7 +132,10 @@ const CategoryForm = ({
           </div>
 
           <div className="mb-4">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >
               Description
             </label>
             <textarea
@@ -152,7 +163,8 @@ const CategoryForm = ({
               disabled={isSubmitting}
               className="px-3 py-1.5 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 flex items-center gap-1"
             >
-              <SaveOutlined /> {isSubmitting ? "Saving..." : isEditMode ? "Update" : "Save"}
+              <SaveOutlined />{" "}
+              {isSubmitting ? "Saving..." : isEditMode ? "Update" : "Save"}
             </button>
           </div>
         </form>

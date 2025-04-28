@@ -12,7 +12,12 @@ interface CategoryDetailProps {
   onDelete: () => void;
 }
 
-const CategoryDetail = ({ category, onClose, onEdit, onDelete }: CategoryDetailProps) => {
+const CategoryDetail = ({
+  category,
+  onClose,
+  onEdit,
+  onDelete
+}: CategoryDetailProps) => {
   const { getToken } = useAuth();
   const [isDeleting, setIsDeleting] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -35,10 +40,10 @@ const CategoryDetail = ({ category, onClose, onEdit, onDelete }: CategoryDetailP
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
     });
   };
 
@@ -46,7 +51,9 @@ const CategoryDetail = ({ category, onClose, onEdit, onDelete }: CategoryDetailP
     <div className="fixed inset-0 bg-slate-100 bg-opacity-30 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden w-full max-w-md">
         <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
-          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">Category Details</h2>
+          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">
+            Category Details
+          </h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -63,8 +70,12 @@ const CategoryDetail = ({ category, onClose, onEdit, onDelete }: CategoryDetailP
 
         <div className="p-4">
           <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded mb-4">
-            <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">{category.name}</h3>
-            <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line text-sm">{category.description}</p>
+            <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">
+              {category.name}
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line text-sm">
+              {category.description}
+            </p>
           </div>
 
           <div className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
@@ -97,7 +108,9 @@ const CategoryDetail = ({ category, onClose, onEdit, onDelete }: CategoryDetailP
         {/* Delete Confirmation Dialog */}
         {showDeleteConfirm && (
           <div className="mx-4 mb-4 p-3 border border-red-100 dark:border-red-900 bg-red-50 dark:bg-red-900/30 rounded">
-            <h3 className="text-sm font-medium text-red-700 dark:text-red-400 mb-2">Confirm Deletion</h3>
+            <h3 className="text-sm font-medium text-red-700 dark:text-red-400 mb-2">
+              Confirm Deletion
+            </h3>
             <p className="text-red-600 dark:text-red-300 text-sm mb-3">
               Are you sure you want to delete "{category.name}"?
             </p>

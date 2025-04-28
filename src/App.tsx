@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Post from "./pages/Post";
 import Books from "./components/Books";
-import Category from "./components/Category";
+import Category from "./pages/Category";
 import BookReviewSystem from "./components/Review";
 import Register from "./pages/Register";
 import PrivateRoute from "./utils/PrivateRoute";

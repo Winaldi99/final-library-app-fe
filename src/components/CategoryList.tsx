@@ -1,5 +1,5 @@
 // CategoryList.tsx
-import { CategoryType } from "./Category";
+import { CategoryType } from "../pages/Category";
 import { EyeOutlined, EditOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 interface CategoryListProps {
