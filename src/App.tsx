@@ -12,7 +12,7 @@ import Login from "./pages/Login";
 import Post from "./pages/Post";
 import Books from "./pages/Books";
 import Category from "./pages/Category";
-import BookReviewSystem from "./components/Review";
+import BookReviewSystem from "./pages/Review";
 import Register from "./pages/Register";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
