@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../utils/AuthProvider";
 import axios from "../utils/AxiosInstance";
-import { BookType, CategoryType } from "./Books";
+import { BookType, CategoryType } from "../pages/Books";
 import { CloseOutlined, SaveOutlined } from "@ant-design/icons";
 
 interface BookFormProps {

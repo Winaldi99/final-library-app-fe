@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useAuth } from "../utils/AuthProvider";
 import axios from "../utils/AxiosInstance";
-import BookList from "./BookList";
-import BookForm from "./BookForm";
+import BookList from "../components/BookList";
+import BookForm from "../components/BookForm";
 import BookDetail from "./BookDetail";
 import { PlusOutlined } from "@ant-design/icons";
 
@@ -98,7 +98,9 @@ const Books = () => {
   return (
     <div className="p-4 max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-200">My Books Collection</h1>
+        <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
+          My Books Collection
+        </h1>
         <button
           onClick={handleAddNewClick}
           className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded flex items-center gap-1 text-sm transition-colors duration-200"
@@ -106,18 +108,18 @@ const Books = () => {
           <PlusOutlined /> Add Book
         </button>
       </div>
-      
+
       {/* Book List Section */}
       {bookData && (
-        <BookList 
-          books={bookData.data} 
-          onEdit={handleEditClick} 
+        <BookList
+          books={bookData.data}
+          onEdit={handleEditClick}
           onView={handleViewClick}
           onPageChange={handlePageChange}
           currentPage={currentPage}
         />
       )}
-      
+
       {/* Book Form Modal */}
       {isFormOpen && (
         <BookForm
@@ -129,7 +131,7 @@ const Books = () => {
           categories={categoryData?.data || []}
         />
       )}
-      
+
       {/* Book Detail Modal */}
       {selectedBook && !isFormOpen && (
         <BookDetail

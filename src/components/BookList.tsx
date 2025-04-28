@@ -1,5 +1,5 @@
 // BookList.tsx
-import { BookType } from "./Books";
+import { BookType } from "../pages/Books";
 import { EyeOutlined, EditOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 interface BookListProps {

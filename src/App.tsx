@@ -10,7 +10,7 @@ import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Post from "./pages/Post";
-import Books from "./components/Books";
+import Books from "./pages/Books";
 import Category from "./pages/Category";
 import BookReviewSystem from "./components/Review";
 import Register from "./pages/Register";

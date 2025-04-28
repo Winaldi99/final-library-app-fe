@@ -35,10 +35,10 @@ const BookDetail = ({ book, onClose, onEdit, onDelete }: BookDetailProps) => {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
     });
   };
 
@@ -46,7 +46,9 @@ const BookDetail = ({ book, onClose, onEdit, onDelete }: BookDetailProps) => {
     <div className="fixed inset-0 bg-slate-100 bg-opacity-30 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden w-full max-w-xl">
         <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
-          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">Book Details</h2>
+          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">
+            Book Details
+          </h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -70,12 +72,15 @@ const BookDetail = ({ book, onClose, onEdit, onDelete }: BookDetailProps) => {
                   alt={book.title}
                   className="w-full h-56 object-cover rounded-lg shadow-sm"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/300x400?text=Image+Not+Found';
+                    (e.target as HTMLImageElement).src =
+                      "https://via.placeholder.com/300x400?text=Image+Not+Found";
                   }}
                 />
               ) : (
                 <div className="w-full h-56 bg-gray-200 dark:bg-gray-700 flex items-center justify-center rounded-lg">
-                  <span className="text-gray-500 dark:text-gray-400">No Image</span>
+                  <span className="text-gray-500 dark:text-gray-400">
+                    No Image
+                  </span>
                 </div>
               )}
             </div>
@@ -84,16 +89,20 @@ const BookDetail = ({ book, onClose, onEdit, onDelete }: BookDetailProps) => {
               <div className="bg-blue-100 dark:bg-blue-900/30 inline-block px-2 py-0.5 rounded text-xs font-medium text-blue-700 dark:text-blue-300 mb-2">
                 {book.category?.name || "Uncategorized"}
               </div>
-              
-              <h1 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">{book.title}</h1>
-              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">by {book.author}</p>
-              
+
+              <h1 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">
+                {book.title}
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                by {book.author}
+              </p>
+
               <div className="space-y-1 text-sm text-gray-500 dark:text-gray-400 mb-4">
                 <div className="flex">
                   <span className="w-24 font-medium">Added on:</span>
                   <span>{formatDate(book.created_at)}</span>
                 </div>
-                
+
                 {book.updated_at !== book.created_at && (
                   <div className="flex">
                     <span className="w-24 font-medium">Updated:</span>
@@ -122,7 +131,9 @@ const BookDetail = ({ book, onClose, onEdit, onDelete }: BookDetailProps) => {
           {/* Delete Confirmation Dialog */}
           {showDeleteConfirm && (
             <div className="mt-4 p-3 border border-red-100 dark:border-red-900 bg-red-50 dark:bg-red-900/30 rounded">
-              <h3 className="text-sm font-medium text-red-700 dark:text-red-400 mb-2">Confirm Deletion</h3>
+              <h3 className="text-sm font-medium text-red-700 dark:text-red-400 mb-2">
+                Confirm Deletion
+              </h3>
               <p className="text-red-600 dark:text-red-300 text-sm mb-3">
                 Are you sure you want to delete "{book.title}"?
               </p>
