@@ -20,7 +20,7 @@ const Home = () => {
           </h1>
           
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Kelola koleksi buku Anda dengan mudah. Tambahkan, edit, dan organisasikan buku favorit Anda dengan kategori dan ulasan.
+            Kelola koleksi buku yang pernah anda baca dengan mudah. Tambahkan, edit, dan organisasikan buku berdasarkan kategori dan ulasan.
           </p>
           
           <div className="space-y-6">
