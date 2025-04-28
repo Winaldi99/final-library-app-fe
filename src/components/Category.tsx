@@ -6,6 +6,7 @@ import axios from "../utils/AxiosInstance";
 import CategoryList from "./CategoryList";
 import CategoryForm from "./CategoryForm";
 import CategoryDetail from "./CategoryDetail";
+import { PlusOutlined } from "@ant-design/icons";
 
 export type CategoryType = {
   id: number;
@@ -74,14 +75,14 @@ const Category = () => {
   };
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Categories</h1>
+    <div className="p-4 max-w-6xl mx-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-200">Categories</h1>
         <button
           onClick={handleAddNewClick}
-          className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+          className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded flex items-center gap-1 text-sm transition-colors duration-200"
         >
-          Add New Category
+          <PlusOutlined /> Add Category
         </button>
       </div>
       

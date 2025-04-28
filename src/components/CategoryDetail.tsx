@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuth } from "../utils/AuthProvider";
 import axios from "../utils/AxiosInstance";
 import { CategoryType } from "./Category";
+import { CloseOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 interface CategoryDetailProps {
   category: CategoryType;
@@ -42,80 +43,78 @@ const CategoryDetail = ({ category, onClose, onEdit, onDelete }: CategoryDetailP
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Category Details</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 p-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden w-full max-w-md">
+        <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
+          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">Category Details</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <CloseOutlined />
           </button>
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="m-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded">
             {error}
           </div>
         )}
 
-        <div>
-          <div className="bg-green-50 p-6 rounded-lg mb-6">
-            <h3 className="text-xl font-semibold text-green-800 mb-2">{category.name}</h3>
-            <p className="text-gray-700 whitespace-pre-line">{category.description}</p>
+        <div className="p-4">
+          <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded mb-4">
+            <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">{category.name}</h3>
+            <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line text-sm">{category.description}</p>
           </div>
 
-          <div className="space-y-3 text-sm text-gray-600">
+          <div className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
             <div className="flex">
-              <span className="font-medium w-32">Created:</span>
+              <span className="font-medium w-28">Created:</span>
               <span>{formatDate(category.created_at)}</span>
             </div>
             <div className="flex">
-              <span className="font-medium w-32">Last updated:</span>
+              <span className="font-medium w-28">Last updated:</span>
               <span>{formatDate(category.updated_at)}</span>
             </div>
           </div>
 
-          <div className="flex justify-end space-x-3 mt-6">
+          <div className="flex justify-end space-x-2 mt-6">
             <button
               onClick={onEdit}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-3 py-1.5 bg-blue-500 text-white rounded flex items-center gap-1 hover:bg-blue-600 text-sm"
             >
-              Edit
+              <EditOutlined /> Edit
             </button>
             <button
               onClick={() => setShowDeleteConfirm(true)}
-              className="px-4 py-2 bg-white border border-red-500 text-red-500 rounded-md hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="px-3 py-1.5 bg-white border border-red-500 text-red-500 rounded flex items-center gap-1 hover:bg-red-50 text-sm"
             >
-              Delete
+              <DeleteOutlined /> Delete
             </button>
           </div>
         </div>
 
         {/* Delete Confirmation Dialog */}
         {showDeleteConfirm && (
-          <div className="mt-6 p-4 border border-red-100 bg-red-50 rounded-lg">
-            <h3 className="text-lg font-medium text-red-800 mb-2">Confirm Deletion</h3>
-            <p className="text-red-600 mb-4">
-              Are you sure you want to delete the category "{category.name}"? This action cannot be undone.
+          <div className="mx-4 mb-4 p-3 border border-red-100 dark:border-red-900 bg-red-50 dark:bg-red-900/30 rounded">
+            <h3 className="text-sm font-medium text-red-700 dark:text-red-400 mb-2">Confirm Deletion</h3>
+            <p className="text-red-600 dark:text-red-300 text-sm mb-3">
+              Are you sure you want to delete "{category.name}"?
             </p>
-            <div className="flex justify-end space-x-3">
+            <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50"
+                className="px-3 py-1 bg-white border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded text-sm"
                 disabled={isDeleting}
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
+                className="px-3 py-1 bg-red-500 text-white rounded text-sm disabled:opacity-50"
                 disabled={isDeleting}
               >
-                {isDeleting ? "Deleting..." : "Delete Category"}
+                {isDeleting ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>

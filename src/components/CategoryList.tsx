@@ -1,5 +1,6 @@
 // CategoryList.tsx
 import { CategoryType } from "./Category";
+import { EyeOutlined, EditOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 interface CategoryListProps {
   categories: CategoryType[];
@@ -19,55 +20,55 @@ const CategoryList = ({
   return (
     <div>
       {categories.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-lg shadow">
-          <p className="text-gray-500 text-lg">No categories found. Add a new category to get started!</p>
+        <div className="text-center py-8 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
+          <p className="text-gray-500 dark:text-gray-400">No categories found. Add a new category to get started!</p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                     Name
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                     Description
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Created At
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                    Created
                   </th>
-                  <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                 {categories.map((category) => (
-                  <tr key={category.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="font-medium text-gray-900">{category.name}</div>
+                  <tr key={category.id} className="hover:bg-gray-50 dark:hover:bg-gray-900/50">
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <div className="font-medium text-gray-900 dark:text-white">{category.name}</div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-500 line-clamp-2">{category.description}</div>
+                    <td className="px-4 py-3">
+                      <div className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">{category.description}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-500">
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
                         {new Date(category.created_at).toLocaleDateString()}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <td className="px-4 py-3 whitespace-nowrap text-right text-sm font-medium">
                       <button
                         onClick={() => onView(category)}
-                        className="text-green-600 hover:text-green-900 mr-4"
+                        className="text-blue-500 hover:text-blue-700 mr-2 inline-flex items-center gap-1"
                       >
-                        View
+                        <EyeOutlined />
                       </button>
                       <button
                         onClick={() => onEdit(category)}
-                        className="text-indigo-600 hover:text-indigo-900"
+                        className="text-green-500 hover:text-green-700 inline-flex"
                       >
-                        Edit
+                        <EditOutlined />
                       </button>
                     </td>
                   </tr>
@@ -79,23 +80,23 @@ const CategoryList = ({
       )}
       
       {/* Pagination */}
-      <div className="flex justify-center mt-6">
-        <div className="flex space-x-2">
+      <div className="flex justify-center mt-4">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage <= 1}
-            className="px-4 py-2 rounded bg-gray-200 disabled:opacity-50"
+            className="p-1.5 rounded border border-gray-300 dark:border-gray-600 disabled:opacity-50 flex items-center justify-center text-gray-500 dark:text-gray-400 disabled:text-gray-300 dark:disabled:text-gray-600"
           >
-            Previous
+            <LeftOutlined />
           </button>
-          <span className="px-4 py-2 rounded bg-green-100">
-            Page {currentPage}
+          <span className="px-3 py-1.5 rounded bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-sm">
+            {currentPage}
           </span>
           <button
             onClick={() => onPageChange(currentPage + 1)}
-            className="px-4 py-2 rounded bg-gray-200"
+            className="p-1.5 rounded border border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-400"
           >
-            Next
+            <RightOutlined />
           </button>
         </div>
       </div>
