@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { BookOutlined, RightOutlined, HeartOutlined } from "@ant-design/icons";
+import { BookOutlined, RightOutlined, MoonFilled } from "@ant-design/icons";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Home = () => {
       
       {/* Footer */}
       <footer className="py-4 text-center text-gray-500 dark:text-gray-400 text-sm flex items-center justify-center gap-1">
-        Dibuat dengan <HeartOutlined className="text-red-500" /> oleh Winaldi
+        Dibuat tiap <MoonFilled /> oleh Winaldi
       </footer>
     </div>
   );

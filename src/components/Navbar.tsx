@@ -5,8 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../utils/AuthProvider";
 import { LogoutOutlined, BellOutlined, MenuOutlined, CloseOutlined, BookOutlined } from "@ant-design/icons";
 
-const navigation = [{ name: "Post", to: "/posts", current: false },
-                    { name: "Books", to: "/books", current: false },
+const navigation = [{ name: "Books", to: "/books", current: false },
                     { name: "Categories", to: "/categories", current: false },
                     { name: "Review", to: "/review", current: false }];
 
