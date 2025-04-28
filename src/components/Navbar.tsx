@@ -1,13 +1,9 @@
 import {
-  Disclosure,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems
+  Disclosure
 } from "@headlessui/react";
-import { BellIcon } from "@heroicons/react/16/solid";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../utils/AuthProvider";
+import { LogoutOutlined, BellOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 
 const navigation = [{ name: "Post", to: "/posts", current: false },
                     { name: "Books", to: "/books", current: false },
@@ -21,96 +17,97 @@ function classNames(...classes: string[]) {
 const Navbar = () => {
   const { logout } = useAuth();
   return (
-    <Disclosure as="nav" className="bg-gray-800">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center">
-              <img
-                alt="Your Company"
-                src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto"
-              />
-            </div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <NavLink
-                    to={item.to}
-                    key={item.name}
-                    className={({ isActive }) => {
-                      return classNames(
-                        isActive
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "rounded-md px-3 py-2 text-sm font-medium"
-                      );
-                    }}
-                  >
-                    {item.name}
-                  </NavLink>
-                ))}
+    <Disclosure as="nav" className="bg-white shadow-sm dark:bg-gray-800">
+      {({ open }) => (
+        <>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              {/* Mobile menu button */}
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <CloseOutlined className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <MenuOutlined className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
               </div>
-            </div>
-          </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="size-6" />
-            </button>
-
-            {/* Profile dropdown */}
-            <Menu as="div" className="relative ml-3">
-              <div>
-                <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">Open user menu</span>
+              
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex shrink-0 items-center">
                   <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    className="size-8 rounded-full"
+                    alt="Your Company"
+                    src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                    className="h-8 w-auto"
                   />
-                </MenuButton>
+                </div>
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    {navigation.map((item) => (
+                      <NavLink
+                        to={item.to}
+                        key={item.name}
+                        className={({ isActive }) => {
+                          return classNames(
+                            isActive
+                              ? "text-indigo-600 border-b-2 border-indigo-600 dark:text-white dark:border-white"
+                              : "text-gray-500 hover:text-indigo-600 hover:border-b-2 hover:border-indigo-600 dark:text-gray-300 dark:hover:text-white dark:hover:border-white",
+                            "px-3 py-2 text-sm font-medium"
+                          );
+                        }}
+                      >
+                        {item.name}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <MenuItems
-                transition
-                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-              >
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Your Profile
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Settings
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    onClick={() => {
-                      logout();
-                    }}
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Sign out
-                  </a>
-                </MenuItem>
-              </MenuItems>
-            </Menu>
+              
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-3">
+                <button
+                  type="button"
+                  className="relative p-1 text-gray-500 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-white"
+                >
+                  <span className="sr-only">View notifications</span>
+                  <BellOutlined className="text-xl" />
+                </button>
+
+                {/* Tombol Logout */}
+                <button
+                  onClick={() => logout()}
+                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-white"
+                >
+                  <LogoutOutlined className="mr-1" />
+                  Logout
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+
+          {/* Mobile menu */}
+          <Disclosure.Panel className="sm:hidden">
+            <div className="space-y-1 px-2 pb-3 pt-2">
+              {navigation.map((item) => (
+                <NavLink
+                  to={item.to}
+                  key={item.name}
+                  className={({isActive}) => 
+                    classNames(
+                      isActive 
+                        ? 'text-indigo-600 bg-gray-100 dark:bg-gray-700 dark:text-white' 
+                        : 'text-gray-500 hover:bg-gray-100 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white',
+                      'block px-3 py-2 rounded-md text-base font-medium'
+                    )
+                  }
+                >
+                  {item.name}
+                </NavLink>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
     </Disclosure>
   );
 };
