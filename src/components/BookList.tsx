@@ -1,5 +1,6 @@
 // BookList.tsx
 import { BookType } from "./Books";
+import { EyeOutlined, EditOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 interface BookListProps {
   books: BookType[];
@@ -11,40 +12,42 @@ interface BookListProps {
 
 const BookList = ({ books, onEdit, onView, onPageChange, currentPage }: BookListProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div>
       {books.length === 0 ? (
-        <div className="col-span-full text-center py-12 text-gray-500">
-          No books found. Add a new book to your collection!
+        <div className="text-center py-8 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+          <p className="text-gray-500 dark:text-gray-400">No books found. Add a new book to your collection!</p>
         </div>
       ) : (
-        books.map((book) => (
-          <BookCard
-            key={book.id}
-            book={book}
-            onEdit={() => onEdit(book)}
-            onView={() => onView(book)}
-          />
-        ))
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {books.map((book) => (
+            <BookCard
+              key={book.id}
+              book={book}
+              onEdit={() => onEdit(book)}
+              onView={() => onView(book)}
+            />
+          ))}
+        </div>
       )}
       
       {/* Pagination */}
-      <div className="col-span-full flex justify-center mt-6">
-        <div className="flex space-x-2">
+      <div className="flex justify-center mt-4">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage <= 1}
-            className="px-4 py-2 rounded bg-gray-200 disabled:opacity-50"
+            className="p-1.5 rounded border border-gray-300 dark:border-gray-600 disabled:opacity-50 flex items-center justify-center text-gray-500 dark:text-gray-400 disabled:text-gray-300 dark:disabled:text-gray-600"
           >
-            Previous
+            <LeftOutlined />
           </button>
-          <span className="px-4 py-2 rounded bg-indigo-100">
-            Page {currentPage}
+          <span className="px-3 py-1.5 rounded bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-sm">
+            {currentPage}
           </span>
           <button
             onClick={() => onPageChange(currentPage + 1)}
-            className="px-4 py-2 rounded bg-gray-200"
+            className="p-1.5 rounded border border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-400"
           >
-            Next
+            <RightOutlined />
           </button>
         </div>
       </div>
@@ -60,38 +63,41 @@ interface BookCardProps {
 
 const BookCard = ({ book, onEdit, onView }: BookCardProps) => {
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
-      <div className="relative h-64">
+    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-200 hover:shadow-md">
+      <div className="relative h-48">
         {book.image_url ? (
           <img
             src={book.image_url}
             alt={book.title}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = 'https://via.placeholder.com/300x200?text=Image+Not+Found';
+            }}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-200">
-            <span className="text-gray-500">No Image</span>
+          <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
+            <span className="text-gray-500 dark:text-gray-400">No Image</span>
           </div>
         )}
-        <div className="absolute top-2 right-2 bg-indigo-100 px-2 py-1 rounded-lg text-xs font-medium text-indigo-800">
+        <div className="absolute top-2 right-2 bg-blue-100 dark:bg-blue-900/50 px-2 py-0.5 rounded text-xs font-medium text-blue-700 dark:text-blue-300">
           {book.category?.name || "Uncategorized"}
         </div>
       </div>
-      <div className="p-4">
-        <h3 className="font-bold text-lg mb-1 truncate">{book.title}</h3>
-        <p className="text-gray-600 text-sm mb-3">by {book.author}</p>
-        <div className="flex justify-between items-center mt-4">
+      <div className="p-3">
+        <h3 className="font-medium text-gray-800 dark:text-white mb-1 truncate">{book.title}</h3>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">by {book.author}</p>
+        <div className="flex justify-between items-center mt-3">
           <button
             onClick={onView}
-            className="text-indigo-600 hover:text-indigo-800 font-medium text-sm"
+            className="flex items-center gap-1 text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
           >
-            View Details
+            <EyeOutlined /> View
           </button>
           <button
             onClick={onEdit}
-            className="text-gray-600 hover:text-gray-800 font-medium text-sm"
+            className="flex items-center gap-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 text-sm"
           >
-            Edit
+            <EditOutlined /> Edit
           </button>
         </div>
       </div>

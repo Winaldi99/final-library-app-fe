@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuth } from "../utils/AuthProvider";
 import axios from "../utils/AxiosInstance";
 import { BookType } from "./Books";
+import { CloseOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 interface BookDetailProps {
   book: BookType;
@@ -42,105 +43,108 @@ const BookDetail = ({ book, onClose, onEdit, onDelete }: BookDetailProps) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Book Details</h2>
+    <div className="fixed inset-0 bg-slate-100 bg-opacity-30 flex items-center justify-center z-50 p-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden w-full max-w-xl">
+        <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
+          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">Book Details</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <CloseOutlined />
           </button>
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="m-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded">
             {error}
           </div>
         )}
 
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="w-full md:w-1/3">
-            {book.image_url ? (
-              <img
-                src={book.image_url}
-                alt={book.title}
-                className="w-full h-64 object-cover rounded-lg shadow"
-              />
-            ) : (
-              <div className="w-full h-64 bg-gray-200 flex items-center justify-center rounded-lg">
-                <span className="text-gray-500">No Image</span>
-              </div>
-            )}
-          </div>
-
-          <div className="w-full md:w-2/3">
-            <div className="bg-indigo-100 inline-block px-3 py-1 rounded-full text-sm font-medium text-indigo-800 mb-3">
-              {book.category?.name || "Uncategorized"}
-            </div>
-            
-            <h1 className="text-2xl font-bold mb-2">{book.title}</h1>
-            <p className="text-gray-600 text-lg mb-4">by {book.author}</p>
-            
-            <div className="space-y-2 text-gray-700">
-              <div className="flex items-center">
-                <span className="text-gray-500">Added on:</span>
-                <span className="ml-2">{formatDate(book.created_at)}</span>
-              </div>
-              
-              {book.updated_at !== book.created_at && (
-                <div className="flex items-center">
-                  <span className="text-gray-500">Last updated:</span>
-                  <span className="ml-2">{formatDate(book.updated_at)}</span>
+        <div className="p-4">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="w-full sm:w-2/5">
+              {book.image_url ? (
+                <img
+                  src={book.image_url}
+                  alt={book.title}
+                  className="w-full h-56 object-cover rounded-lg shadow-sm"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/300x400?text=Image+Not+Found';
+                  }}
+                />
+              ) : (
+                <div className="w-full h-56 bg-gray-200 dark:bg-gray-700 flex items-center justify-center rounded-lg">
+                  <span className="text-gray-500 dark:text-gray-400">No Image</span>
                 </div>
               )}
             </div>
 
-            <div className="flex flex-wrap gap-2 mt-6">
-              <button
-                onClick={onEdit}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors duration-300"
-              >
-                Edit Book
-              </button>
-              <button
-                onClick={() => setShowDeleteConfirm(true)}
-                className="bg-white hover:bg-red-50 text-red-600 border border-red-600 px-4 py-2 rounded-lg transition-colors duration-300"
-              >
-                Delete Book
-              </button>
-            </div>
-          </div>
-        </div>
+            <div className="w-full sm:w-3/5">
+              <div className="bg-blue-100 dark:bg-blue-900/30 inline-block px-2 py-0.5 rounded text-xs font-medium text-blue-700 dark:text-blue-300 mb-2">
+                {book.category?.name || "Uncategorized"}
+              </div>
+              
+              <h1 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">{book.title}</h1>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">by {book.author}</p>
+              
+              <div className="space-y-1 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                <div className="flex">
+                  <span className="w-24 font-medium">Added on:</span>
+                  <span>{formatDate(book.created_at)}</span>
+                </div>
+                
+                {book.updated_at !== book.created_at && (
+                  <div className="flex">
+                    <span className="w-24 font-medium">Updated:</span>
+                    <span>{formatDate(book.updated_at)}</span>
+                  </div>
+                )}
+              </div>
 
-        {/* Delete Confirmation Dialog */}
-        {showDeleteConfirm && (
-          <div className="mt-6 p-4 border border-red-100 bg-red-50 rounded-lg">
-            <h3 className="text-lg font-medium text-red-800 mb-2">Confirm Deletion</h3>
-            <p className="text-red-600 mb-4">
-              Are you sure you want to delete "{book.title}"? This action cannot be undone.
-            </p>
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => setShowDeleteConfirm(false)}
-                className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50"
-                disabled={isDeleting}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleDelete}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
-                disabled={isDeleting}
-              >
-                {isDeleting ? "Deleting..." : "Delete Book"}
-              </button>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <button
+                  onClick={onEdit}
+                  className="px-3 py-1.5 bg-blue-500 text-white rounded flex items-center gap-1 hover:bg-blue-600 text-sm"
+                >
+                  <EditOutlined /> Edit
+                </button>
+                <button
+                  onClick={() => setShowDeleteConfirm(true)}
+                  className="px-3 py-1.5 bg-white dark:bg-transparent border border-red-500 text-red-500 rounded flex items-center gap-1 hover:bg-red-50 dark:hover:bg-red-900/30 text-sm"
+                >
+                  <DeleteOutlined /> Delete
+                </button>
+              </div>
             </div>
           </div>
-        )}
+
+          {/* Delete Confirmation Dialog */}
+          {showDeleteConfirm && (
+            <div className="mt-4 p-3 border border-red-100 dark:border-red-900 bg-red-50 dark:bg-red-900/30 rounded">
+              <h3 className="text-sm font-medium text-red-700 dark:text-red-400 mb-2">Confirm Deletion</h3>
+              <p className="text-red-600 dark:text-red-300 text-sm mb-3">
+                Are you sure you want to delete "{book.title}"?
+              </p>
+              <div className="flex justify-end space-x-2">
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  className="px-3 py-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded text-sm"
+                  disabled={isDeleting}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDelete}
+                  className="px-3 py-1 bg-red-500 text-white rounded text-sm disabled:opacity-50"
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? "Deleting..." : "Delete"}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
