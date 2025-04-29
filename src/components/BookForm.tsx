@@ -46,11 +46,11 @@ const BookForm = ({
       setFormData({
         title: book.title,
         author: book.author,
-        categoryId: book.category_id,
+        categoryId: book.category_id || (categories.length > 0 ? categories[0].id : 0),
         imageUrl: book.image_url
       });
     }
-  }, [isEditMode, book]);
+  }, [isEditMode, book, categories]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
