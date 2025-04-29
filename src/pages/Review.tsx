@@ -96,7 +96,7 @@ const ReviewCard = ({
           <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">{review.book.title}</h2>
           <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 mb-1">
             <TagOutlined className="text-gray-400" />
-            <span>{review.book.category.name}</span>
+            <span>{review.book.category?.name || "Uncategorized"}</span>
           </div>
           <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
             <ClockCircleOutlined className="text-gray-400" />
